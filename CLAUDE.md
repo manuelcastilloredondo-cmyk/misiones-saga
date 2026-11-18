@@ -58,5 +58,5 @@ Agenda visual fija con 4 pasos: 📖 Aprende → 🎮 Juega → ⚔️ Reto → 
 - Erratas corregidas de los apuntes: «Europa cristina», «liberal la Tierra Santa», «hombre libres»; el aceite de oliva tiene 0,92 g/cm³ (los apuntes dicen 0,8 en un ejemplo).
 
 ## Flujo de trabajo
-- No activar GitHub Pages ni publicar sin el visto bueno de Manolo.
+- GitHub Pages está activo desde la rama main (https://manuelcastilloredondo-cmyk.github.io/misiones-saga/). Todo lo que se sube a main se publica: trabajar en otra rama y pasar a main solo con el visto bueno de Manolo.
 - Antes de dar algo por terminado, comprobar que no hay errores de JavaScript.
