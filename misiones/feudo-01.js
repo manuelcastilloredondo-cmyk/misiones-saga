@@ -1,0 +1,62 @@
+/* feudo-01 */
+(function () {
+  const IMG = Motor.img;
+  Motor.registrar('feudo-01', {
+    orbe: 'Orbe del Origen',
+    meta: 150,
+    pantallas: [
+    {tipo:'leer', fase:0, titulo:'¿Cuándo y dónde?',
+     img:IMG("Partage_de_l%27Empire_carolingien_au_Trait%C3%A9_de_Verdun_en_843.JPG"),
+     pie:'Mapa del reparto del Imperio Carolingio en tres reinos. Dominio público (Wikimedia Commons).',
+     html:'El feudalismo fue la forma de organizar <b>Europa</b> entre los <span class="clave">siglos X y XII</span> (del 10 al 12).<br>Apareció cuando el <b>Imperio Carolingio</b> se dividió en trozos, como en el mapa.',
+     truco:{tipo:'Leer números romanos', html:'<span class="letra">X</span> = 10. Cada palito <span class="letra">I</span> que va detrás suma 1:<br><span class="letra">X</span> = 10 · <span class="letra">XI</span> = 10 + 1 = 11 · <span class="letra">XII</span> = 10 + 2 = 12.'}},
+    {tipo:'leer', fase:0, titulo:'¿Por qué apareció?',
+     img:IMG("Oseberg_longship.png"),
+     pie:'Barco vikingo de Oseberg (Museo de Barcos Vikingos, Oslo). Dominio público (Wikimedia Commons).',
+     html:'Europa sufrió <span class="clave">invasiones</span> de cuatro pueblos: <b>musulmanes</b>, <b>eslavos</b>, <b>húngaros</b> y <b>normandos</b> (los vikingos, que llegaban en barcos como este).<br>Había mucha <b>inseguridad</b>, así que la gente se fue al <b>campo</b> para buscar protección.',
+     truco:{tipo:'Frase con las iniciales', html:'<span class="letra">M</span>uchos <span class="letra">E</span>nemigos <span class="letra">H</span>acen <span class="letra">N</span>aufragar → <b>M</b>usulmanes, <b>E</b>slavos, <b>H</b>úngaros, <b>N</b>ormandos. ¡Los vikingos venían en barco!'}},
+    {tipo:'leer', fase:0, titulo:'¿Cómo se vivía?',
+     img:IMG("Detail_of_Les_tres_riches_heures_-_March.jpg"),
+     pie:'Campesinos trabajando junto a un castillo. «Très Riches Heures», siglo XV. Dominio público (Wikimedia Commons).',
+     html:'La vida giraba alrededor de <b>grandes fincas en el campo</b>. Las tierras eran de los <b>nobles</b>, y por eso tenían el poder.<br>Allí se producía todo lo necesario: eso es el <span class="clave">autoabastecimiento</span>. Por eso el <b>comercio casi desapareció</b>.',
+     truco:{tipo:'Partir la palabra', html:'<span class="letra">AUTO</span> + <span class="letra">ABASTECER</span>. «Auto» es uno mismo (como en <i>autorretrato</i>). «Abastecer» es conseguir lo que hace falta. → <b>Producir uno mismo lo que necesita.</b>'}},
+    {tipo:'flash', fase:0, titulo:'Tarjetas flash',
+     ayuda:'Intenta responder <b>de memoria</b> y luego toca la tarjeta para comprobarlo. Tienes que darles la vuelta a las 4.',
+     cartas:[
+       {f:'¿En qué siglos hubo feudalismo?', a:'Del X al XII<small>del 10 al 12 · X = 10, cada palito suma 1</small>'},
+       {f:'¿Qué 4 pueblos invadieron Europa?', a:'Musulmanes, eslavos, húngaros y normandos<small>Muchos Enemigos Hacen Naufragar</small>'},
+       {f:'¿Por qué la gente se fue al campo?', a:'Por la inseguridad: buscaba protección'},
+       {f:'¿Qué es el autoabastecimiento?', a:'Producir uno mismo lo que necesita<small>auto + abastecer</small>'}
+     ]},
+    {tipo:'ordenar', fase:1, pregunta:'Monta la cadena de la historia',
+     ayuda:'Toca las frases en orden: de lo que pasó primero a lo que pasó al final.',
+     orden:['Se divide el Imperio Carolingio','Llegan las invasiones','Hay mucha inseguridad','La gente se refugia en el campo','Nace el feudalismo'],
+     pistas:['Todo empezó cuando un gran imperio se partió en trozos.',
+             'Con el imperio débil, llegaron enemigos de fuera.',
+             'Con tantos ataques, ¿cómo se sentía la gente?',
+             '¿Adónde fue la gente a buscar protección?',
+             'Al final aparece un sistema nuevo. ¿Cómo se llama el tema?'],
+     bien:'Así nació el feudalismo.'},
+    {tipo:'multi', fase:1, pregunta:'¿Quién invadió Europa?',
+     ayuda:'Elige los 4 pueblos invasores y pulsa «Comprobar».',
+     opciones:[{t:'Normandos (vikingos)',ok:true},{t:'Aztecas',ok:false},{t:'Musulmanes',ok:true},{t:'Eslavos',ok:true},{t:'Romanos',ok:false},{t:'Húngaros',ok:true}],
+     pistaMal:'Los aztecas vivían en América y los romanos son de una época anterior.',
+     pistaTruco:'Recuerda la frase: «Muchos Enemigos Hacen Naufragar». Busca un pueblo para cada inicial: M, E, H, N.',
+     pistaGuia:'es uno de los invasores',
+   bien:'Musulmanes, eslavos, húngaros y normandos.'},
+    {tipo:'test', fase:2, pregunta:'¿Entre qué siglos hubo feudalismo en Europa?',
+     opciones:[{t:'Siglos I y III',ok:false},{t:'Siglos X y XII',ok:true},{t:'Siglos XV y XVII',ok:false}],
+     pistas:['Son números romanos. La X vale 10.','X = 10 y cada palito suma 1. Busca la opción que dice «X y XII».'],
+     bien:'Del siglo X al XII, del 10 al 12.'},
+    {tipo:'test', fase:2, pregunta:'¿Qué significa «autoabastecimiento»?',
+     opciones:[{t:'Comprarlo todo en el mercado',ok:false},{t:'Vender comida a otros países',ok:false},{t:'Producir uno mismo lo que necesita',ok:true}],
+     pistas:['Parte la palabra: «auto» significa «uno mismo».','En el feudalismo el comercio casi desapareció. Entonces, ¿se compraba o se producía?'],
+     bien:'Cada finca producía lo que necesitaba.'},
+    {tipo:'test', fase:2, pregunta:'¿Quién tenía el poder en el feudalismo?',
+     opciones:[{t:'Los nobles, dueños de las tierras',ok:true},{t:'Los comerciantes',ok:false},{t:'Los campesinos',ok:false}],
+     pistas:['Piensa en quién era el dueño de las tierras.','El comercio casi desapareció, así que los comerciantes tenían poca fuerza.'],
+     bien:'Quien tenía la tierra tenía el poder.'},
+    {tipo:'fin', fase:3}
+    ]
+  });
+})();
