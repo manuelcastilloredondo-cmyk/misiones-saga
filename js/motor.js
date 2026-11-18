@@ -4,6 +4,26 @@
    ========================================================== */
 (function () {
   'use strict';
+  /* ---------- APP INSTALABLE (PWA) ---------- */
+  try { if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {})); } catch (e) {}
+  let avisoInstalar = null; // evento de instalación de Android / ordenador
+  window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); avisoInstalar = e; mostrarInstalar(); });
+  const yaInstalada = () => { try { return matchMedia('(display-mode: standalone)').matches || navigator.standalone === true; } catch (e) { return false; } };
+  const esIOS = () => /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  function mostrarInstalar() {
+    const caja = document.getElementById('instalar'); if (!caja || yaInstalada()) return;
+    if (avisoInstalar) {
+      caja.innerHTML = '<button class="btn-pista boton" id="btn-instalar">📲 Instalar Luc Z</button>';
+      caja.hidden = false;
+      document.getElementById('btn-instalar').onclick = async () => {
+        try { avisoInstalar.prompt(); await avisoInstalar.userChoice; } catch (e) {}
+        avisoInstalar = null; caja.hidden = true;
+      };
+    } else if (esIOS()) {
+      caja.innerHTML = '<p class="ayuda-instalar">📲 <b>Instálala:</b> pulsa <b>Compartir</b> <span aria-hidden="true">⬆️</span> y luego <b>«Añadir a pantalla de inicio»</b>.</p>';
+      caja.hidden = false;
+    }
+  }
   const $ = id => document.getElementById(id);
   const mezclar = a => { let m; do { m = [...a].sort(() => Math.random() - .5); } while (a.length > 1 && m.join() === a.join()); return m; };
   const FASES = [{ n: 'Aprende', i: '📖' }, { n: 'Juega', i: '🎮' }, { n: 'Reto', i: '⚔️' }, { n: 'Orbe', i: '🔶' }];
@@ -396,7 +416,8 @@
         <div><p class="ante">Tu entrenamiento de estudio</p>
           <div class="logo-portada"><img src="img/logo-luc-z.png" alt="Logo de Luc Z"><h1 class="titular">Luc <em>Z</em></h1></div>
           <p class="entradilla">Cada misión dura entre 10 y 15 minutos. Aprende, juega, supera el reto y consigue su orbe.</p>
-          <div class="acciones" style="margin-top:16px"><button class="voz" id="voz">🔊 Escuchar</button></div></div>
+          <div class="acciones" style="margin-top:16px"><button class="voz" id="voz">🔊 Escuchar</button></div>
+          <div id="instalar" class="instalar" hidden></div></div>
         <div class="panel-poder">
           <div class="dato"><span>⚡ Nivel de poder</span><b>${Progreso.poderTotal()}</b></div>
           <div class="dato"><span>🔶 Orbes</span><b>${hechos} / ${totalOrbes}</b></div>
@@ -405,6 +426,7 @@
       <div class="franja" aria-hidden="true">Aprende <i>·</i> Juega <i>·</i> Reto <i>·</i> Orbe</div>
       <main id="app">${secciones}</main>
       <footer class="pie">Imágenes: Wikimedia Commons (dominio público). Hecho con cariño para estudiar a tu ritmo.</footer>`;
+    mostrarInstalar();
     $('voz').onclick = () => hablar('Luc Zeta. Cada misión dura entre 10 y 15 minutos. Aprende, juega, supera el reto y consigue su orbe.' + (siguiente ? ' Tu siguiente misión es: ' + siguiente.m.titulo + '.' : ''));
   }
 

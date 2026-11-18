@@ -211,3 +211,7 @@ body[data-asig] .tarjeta{max-width:none}
 .logo-portada{display:flex;align-items:center;gap:18px}
 .logo-portada img{width:120px;height:120px;flex:none}
 @media (max-width:600px){.logo-portada img{width:84px;height:84px}}
+/* Instalar la app */
+.instalar{margin-top:14px}
+.instalar .boton{min-height:52px;font-family:var(--titulo);font-weight:800;font-size:18px;letter-spacing:1px;text-transform:uppercase}
+.ayuda-instalar{background:var(--pista-tinte);border-left:6px solid var(--amarillo);border-radius:var(--r-md);padding:10px 14px;margin:0;font-size:17px;max-width:460px}
