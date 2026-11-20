@@ -1,7 +1,7 @@
 /* Service worker de Luc Z: permite instalar la app y usarla sin conexión.
    Con conexión, siempre intenta traer la versión nueva; sin conexión, usa la guardada.
    Al añadir una misión nueva, súmala a ARCHIVOS y cambia VERSION. */
-const VERSION = 'lucz-v2';
+const VERSION = 'lucz-v3';
 const ARCHIVOS = [
   './', 'index.html', 'mision.html', 'manifest.webmanifest',
   'css/estilo.css', 'js/motor.js', 'js/sagas.js',
@@ -30,9 +30,9 @@ self.addEventListener('fetch', e => {
   if (req.method !== 'GET') return;
   const propio = new URL(req.url).origin === self.location.origin;
   if (propio) {
-    // Primero la red (versión nueva); si no hay conexión, la copia guardada.
+    // Primero la red (versión nueva, comprobando siempre con el servidor); si no hay conexión, la copia guardada.
     e.respondWith(
-      fetch(req).then(r => {
+      fetch(req, { cache: 'no-cache' }).then(r => {
         if (r.ok) { const copia = r.clone(); caches.open(VERSION).then(c => c.put(req, copia)); }
         return r;
       }).catch(() => caches.match(req, { ignoreSearch: true }).then(r => r || caches.match('index.html')))
