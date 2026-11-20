@@ -215,3 +215,12 @@ body[data-asig] .tarjeta{max-width:none}
 .instalar{margin-top:14px}
 .instalar .boton{min-height:52px;font-family:var(--titulo);font-weight:800;font-size:18px;letter-spacing:1px;text-transform:uppercase}
 .ayuda-instalar{background:var(--pista-tinte);border-left:6px solid var(--amarillo);border-radius:var(--r-md);padding:10px 14px;margin:0;font-size:17px;max-width:460px}
+/* Lengua (morado) y poemas en pantalla */
+[data-asig="lengua"]{--asig:#8B5CF6; --asig-tinte:#F1EBFF; --asig-hondo:#6D28D9; --asig-texto:#FFFFFF}
+[data-asig="lengua"] .titular em, body[data-asig="lengua"] .titular em{color:var(--asig-hondo)}
+.poema{background:var(--asig-tinte);border-left:6px solid var(--asig);border-radius:var(--r-md);padding:14px 20px;margin:0 0 16px;font-size:21px;line-height:1.6;font-style:italic}
+.poema .hueco{display:block;height:14px}
+.poema mark{background:var(--amarillo);color:var(--tinta);border-radius:4px;padding:0 3px;font-style:normal;font-weight:700}
+.silabas{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.silabas span{background:var(--blanco);border:2px solid var(--asig);border-radius:8px;padding:2px 10px;font-weight:700;font-style:normal}
+.silabas span.u{background:var(--amarillo);border-color:var(--pista-hondo)}

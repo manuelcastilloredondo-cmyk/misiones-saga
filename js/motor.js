@@ -76,9 +76,9 @@
     const sel = $('voces'); if (!sel) return;
     sel.innerHTML = voces.length ? voces.map(v => `<option ${v === vozElegida ? 'selected' : ''}>${v.name}</option>`).join('') : '<option>Voz del sistema</option>';
   }
-  function hablar(t) {
+  function hablar(t, encolar) {
     try {
-      speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(paraVoz(t));
+      if (!encolar) speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(paraVoz(t));
       if (vozElegida) { u.voice = vozElegida; u.lang = vozElegida.lang; } else u.lang = 'es-ES';
       u.rate = 0.95; speechSynthesis.speak(u);
     } catch (e) {}
@@ -149,7 +149,10 @@
     }
     function sumarKi(n) { ki += n; $('ki').textContent = base + ki; $('relleno').style.width = Math.min(100, ki / META * 100) + '%'; }
     function contador() { const p = pantallas[i]; const m = pantallas.filter(x => x.fase === p.fase); return `${FASES[p.fase].n} · ${m.indexOf(p) + 1} de ${m.length}`; }
-    function cabecera(t) { return `<div class="fila"><div class="contador">${contador()}</div><button class="voz" id="voz">🔊 Escuchar</button></div><h2>${t}</h2>`; }
+    function cabecera(t) {
+      const p = pantallas[i]; // texto: poema o versos que se muestran bajo el título (Lengua)
+      return `<div class="fila"><div class="contador">${contador()}</div><button class="voz" id="voz">🔊 Escuchar</button></div><h2>${t}</h2>${p.texto ? `<div class="poema" id="poema">${p.texto}</div>` : ''}`;
+    }
     function siguiente() { callar(); i++; render(); window.scrollTo(0, 0); }
     function pista(el, texto, n) { el.className = 'mensaje pista'; el.innerHTML = `<span class="nivel">Pista ${n}</span>${texto}`; }
     function exito(el, texto) { el.className = 'mensaje bien'; el.textContent = '✓ ¡Bien hecho! ' + texto; }
@@ -382,7 +385,10 @@
       }
     };
 
-    function render() { agenda(); TIPOS[pantallas[i].tipo](pantallas[i]); }
+    function render() {
+      agenda(); const p = pantallas[i]; TIPOS[p.tipo](p);
+      if (p.texto && $('voz')) { const antes = $('voz').onclick; $('voz').onclick = () => { if (antes) antes(); hablar($('poema').innerText, true); }; }
+    }
     render();
   }
 

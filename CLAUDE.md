@@ -11,7 +11,7 @@ Todo el contenido y la interfaz, siempre en español.
 ## Estructura deseada
 - Una sola web estática para GitHub Pages: HTML, CSS y JS sin frameworks ni build.
 - Un motor común (`js/motor.js` + `css/estilo.css`) y un archivo de datos por misión (`misiones/feudo-01.js`, etc.).
-- Página de inicio con mapa de sagas: "Saga del Feudo" (Historia, 9 misiones) y "Saga de la Materia" (Física y Química, 7 misiones). La última misión de cada saga es un "Jefe final" de repaso (`jefe: true` en js/sagas.js), con 5 preguntas de reto.
+- Página de inicio con mapa de sagas: "Saga del Feudo" (Historia, 9 misiones) "Saga de la Materia" (Física y Química, 7 misiones) y "Saga del Verso" (Lengua: poesía, 7 misiones). La última misión de cada saga es un "Jefe final" de repaso (`jefe: true` en js/sagas.js), con 5 preguntas de reto.
 - Progreso (orbes y nivel de poder) guardado en localStorage, siempre dentro de try/catch.
 - Cambiar el diseño en un solo sitio debe cambiarlo en todas las misiones.
 
@@ -26,7 +26,7 @@ Agenda visual fija con 4 pasos: 📖 Aprende → 🎮 Juega → ⚔️ Reto → 
 ## Reglas pedagógicas
 - Una sola tarea por pantalla. Frases cortas. Palabras clave resaltadas.
 - Cada ficha de Aprende lleva un "Truco de memoria" claro y concreto (acrónimo, partir la palabra, comparación con baloncesto, historia en dibujos...). Nada abstracto ni lioso.
-- Cada concepto tiene SIEMPRE el mismo emoji en todas las pantallas y misiones (p. ej. señor 👑, vasallo 🛡️, feudo 🏰, homenaje 🙇, investidura 🎁, traición ⚔️, estamento 🧱, nobleza 🏇, clero ⛪, campesinos 👨‍🌾, privilegio ⭐, impuestos 💰, paje 🧒, escudero 🪖, caballero 🐴, dama 👸, dote 🪙, cultura 📖, juglares y trovadores 🎶, diezmo 🔟, alto clero ⬆️, bajo clero ⬇️, clero secular 🏘️, clero regular 📏, monasterio 🔔, peregrinos 🥾, votos 🤞, siervo ⛓️, libre 🕊️, protección ☂️, reserva señorial 👑, manso 🏡, barbecho 💤, cruzadas ✝️, motivos religiosos 🙏, motivos económicos / comercio 🚢, órdenes militares 🗡️; materia ⚛️, masa 🏋️, volumen 📦, densidad 🪨, sólido 🧊, líquido 💧, gas 💨, progresivo 🔥, regresivo ❄️, partículas 🔵, cero absoluto 🥶). Ojo: «investidura» de caballero (misión 4) no es la investidura feudal 🎁.
+- Cada concepto tiene SIEMPRE el mismo emoji en todas las pantallas y misiones (p. ej. señor 👑, vasallo 🛡️, feudo 🏰, homenaje 🙇, investidura 🎁, traición ⚔️, estamento 🧱, nobleza 🏇, clero ⛪, campesinos 👨‍🌾, privilegio ⭐, impuestos 💰, paje 🧒, escudero 🪖, caballero 🐴, dama 👸, dote 🪙, cultura 📖, juglares y trovadores 🎶, diezmo 🔟, alto clero ⬆️, bajo clero ⬇️, clero secular 🏘️, clero regular 📏, monasterio 🔔, peregrinos 🥾, votos 🤞, siervo ⛓️, libre 🕊️, protección ☂️, reserva señorial 👑, manso 🏡, barbecho 💤, cruzadas ✝️, motivos religiosos 🙏, motivos económicos / comercio 🚢, órdenes militares 🗡️; materia ⚛️, masa 🏋️, volumen 📦, densidad 🪨, sólido 🧊, líquido 💧, gas 💨, progresivo 🔥, regresivo ❄️, partículas 🔵, cero absoluto 🥶; verso 📝, estrofa 🗂️, rima 🎵, vocal tónica 📣, rima consonante 🟰, rima asonante 🔉, sílaba 👏, sinalefa 🔗, aguda ➕, llana 0️⃣, esdrújula ➖, arte menor 🤏, arte mayor 🙌, aliteración 🔊, anáfora 🔁, paralelismo 🪞, hipérbaton 🔀, asíndeton 🏎️, polisíndeton 🐌, símil 👯, metáfora 🪄, metáfora pura ✨, personificación 🗣️, hipérbole 🤯, antítesis 🌗). Ojo: «investidura» de caballero (misión 4) no es la investidura feudal 🎁.
 - Errores: nunca restan puntos. Pistas en 3 niveles: 1) general, 2) concreta, 3) se ilumina la respuesta correcta.
 - Botón "💡 Pedir pista" disponible antes de fallar.
 - Nada de vidas, cronómetros ni comparación con otros.
@@ -42,7 +42,7 @@ Agenda visual fija con 4 pasos: 📖 Aprende → 🎮 Juega → ⚔️ Reto → 
 - Nombre de la web: «Luc Z» (con la Z en naranja). No usar «Dragon Ball» ni palabras de la serie.
 - Logo y favicon: diseño propio de Manolo (img/logo-luc-z.png, favicon-32/64.png, apple-touch-icon.png). No añadir más elementos de la serie.
 - Colores energía: naranja #FF8A00, azul eléctrico #2F7BFF, amarillo #FFD60A, verde #22C55E, noche #16213A. Texto en tinta #1E2A3A.
-- Un color por asignatura (atributo data-asig): Historia = naranja; Física y Química = azul eléctrico (botones con texto blanco). Verde = aciertos y completado. Amarillo = pistas y trucos de memoria.
+- Un color por asignatura (atributo data-asig): Historia = naranja; Física y Química = azul eléctrico (botones con texto blanco); Lengua = morado #8B5CF6 (tono hondo #6D28D9). Verde = aciertos y completado. Amarillo = pistas y trucos de memoria.
 - Nunca rojo para errores: los fallos se tachan en gris.
 - Títulos: Barlow Condensed. Texto: Barlow (máximo 2 tipografías).
 - Toque de anime de combate solo en el vocabulario y los orbes, SIN personajes, logos ni objetos reconocibles de ninguna franquicia.
@@ -55,6 +55,8 @@ Agenda visual fija con 4 pasos: 📖 Aprende → 🎮 Juega → ⚔️ Reto → 
 ## Contenido
 - Fuente: apuntes del colegio. Corregir erratas en la versión web.
 - Física y Química: en el cambio de la temperatura de fusión con la presión, indicar que el agua es la excepción.
+- Lengua: los poemas y versos de ejemplo se muestran con el campo `texto` de la pantalla (caja .poema) y el botón Escuchar también los lee.
+- Al añadir una misión: crear misiones/<id>.js, añadirla en js/sagas.js y en la lista ARCHIVOS de sw.js, y subir VERSION en sw.js.
 - Erratas corregidas de los apuntes: «Europa cristina», «liberal la Tierra Santa», «hombre libres»; el aceite de oliva tiene 0,92 g/cm³ (los apuntes dicen 0,8 en un ejemplo).
 
 ## Flujo de trabajo

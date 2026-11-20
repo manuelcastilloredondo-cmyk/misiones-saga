@@ -22,5 +22,15 @@ window.SAGAS = [
       { id: 'materia-05', titulo: 'La teoría cinética' },
       { id: 'materia-06', titulo: 'La escala Kelvin' },
       { id: 'materia-07', titulo: 'Jefe final de la Materia', jefe: true }
+    ] },
+  { id: 'verso', asig: 'lengua', asigNombre: 'Lengua', nombre: 'Saga del Verso', emoji: '✍️', total: 7,
+    misiones: [
+      { id: 'verso-01', titulo: 'Verso y estrofa' },
+      { id: 'verso-02', titulo: 'La rima' },
+      { id: 'verso-03', titulo: 'Medir los versos' },
+      { id: 'verso-04', titulo: 'Figuras de sonido y orden' },
+      { id: 'verso-05', titulo: 'Figuras de ideas e imágenes' },
+      { id: 'verso-06', titulo: 'Preparo mi poema' },
+      { id: 'verso-07', titulo: 'Jefe final del Verso', jefe: true }
     ] }
 ];
