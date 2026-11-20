@@ -1,7 +1,7 @@
 /* Service worker de Luc Z: permite instalar la app y usarla sin conexión.
    Con conexión, siempre intenta traer la versión nueva; sin conexión, usa la guardada.
    Al añadir una misión nueva, súmala a ARCHIVOS y cambia VERSION. */
-const VERSION = 'lucz-v3';
+const VERSION = 'lucz-v4';
 const ARCHIVOS = [
   './', 'index.html', 'mision.html', 'manifest.webmanifest',
   'css/estilo.css', 'js/motor.js', 'js/sagas.js',
@@ -12,7 +12,7 @@ const ARCHIVOS = [
   'misiones/materia-01.js', 'misiones/materia-02.js', 'misiones/materia-03.js', 'misiones/materia-04.js',
   'misiones/materia-05.js', 'misiones/materia-06.js', 'misiones/materia-07.js',
   'misiones/verso-01.js', 'misiones/verso-02.js', 'misiones/verso-03.js', 'misiones/verso-04.js',
-  'misiones/verso-05.js', 'misiones/verso-06.js', 'misiones/verso-07.js'
+  'misiones/verso-05.js', 'misiones/verso-06.js', 'misiones/verso-07.js', 'misiones/verso-08.js'
 ];
 
 self.addEventListener('install', e => {

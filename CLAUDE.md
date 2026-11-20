@@ -11,7 +11,7 @@ Todo el contenido y la interfaz, siempre en español.
 ## Estructura deseada
 - Una sola web estática para GitHub Pages: HTML, CSS y JS sin frameworks ni build.
 - Un motor común (`js/motor.js` + `css/estilo.css`) y un archivo de datos por misión (`misiones/feudo-01.js`, etc.).
-- Página de inicio con mapa de sagas: "Saga del Feudo" (Historia, 9 misiones) "Saga de la Materia" (Física y Química, 7 misiones) y "Saga del Verso" (Lengua: poesía, 7 misiones). La última misión de cada saga es un "Jefe final" de repaso (`jefe: true` en js/sagas.js), con 5 preguntas de reto.
+- Página de inicio con mapa de sagas: "Saga del Feudo" (Historia, 9 misiones) "Saga de la Materia" (Física y Química, 7 misiones) y "Saga del Verso" (Lengua: poesía, 8 misiones; la 7 es el taller «Escribo mi poema»). La última misión de cada saga es un "Jefe final" de repaso (`jefe: true` en js/sagas.js), con 5 preguntas de reto.
 - Progreso (orbes y nivel de poder) guardado en localStorage, siempre dentro de try/catch.
 - Cambiar el diseño en un solo sitio debe cambiarlo en todas las misiones.
 
@@ -55,6 +55,7 @@ Agenda visual fija con 4 pasos: 📖 Aprende → 🎮 Juega → ⚔️ Reto → 
 ## Contenido
 - Fuente: apuntes del colegio. Corregir erratas en la versión web.
 - Física y Química: en el cambio de la temperatura de fusión con la presión, indicar que el agua es la excepción.
+- Taller de escritura: tipos de pantalla `escribir` (campos que se guardan solos en localStorage, clave lucz-escritos) y `releer` (muestra lo escrito, lista de revisión, botones Copiar y Cambiar algo). Lo escrito nunca sale del aparato.
 - Lengua: los poemas y versos de ejemplo se muestran con el campo `texto` de la pantalla (caja .poema) y el botón Escuchar también los lee.
 - Al añadir una misión: crear misiones/<id>.js, añadirla en js/sagas.js y en la lista ARCHIVOS de sw.js, y subir VERSION en sw.js.
 - Erratas corregidas de los apuntes: «Europa cristina», «liberal la Tierra Santa», «hombre libres»; el aceite de oliva tiene 0,92 g/cm³ (los apuntes dicen 0,8 en un ejemplo).

@@ -30,6 +30,18 @@
   const DATOS = {};
 
   /* ---------- PROGRESO (localStorage siempre en try/catch) ---------- */
+  /* Textos que escribe el alumno (borrador del poema). Solo en este aparato. */
+  const Escritos = (function () {
+    const CLAVE = 'lucz-escritos';
+    let datos = {};
+    try { datos = JSON.parse(localStorage.getItem(CLAVE) || '{}') || {}; } catch (e) { datos = {}; }
+    return {
+      leer: id => datos[id] || '',
+      guardar(id, v) { datos[id] = v; try { localStorage.setItem(CLAVE, JSON.stringify(datos)); } catch (e) {} }
+    };
+  })();
+  const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
   const Progreso = (function () {
     const CLAVE = 'misionesLuc';
     let memoria = null; // por si localStorage no está disponible
@@ -158,6 +170,48 @@
     function exito(el, texto) { el.className = 'mensaje bien'; el.textContent = '✓ ¡Bien hecho! ' + texto; }
 
     const TIPOS = {
+      /* Pantalla para escribir. Lo escrito se guarda en el aparato (clave lucz-escritos). */
+      escribir(p) {
+        const campos = p.campos.map(c => {
+          const val = esc(Escritos.leer(c.id));
+          const caja = c.lineas > 1
+            ? `<textarea id="c-${c.id}" rows="${c.lineas}" placeholder="${c.ejemplo || ''}">${val}</textarea>`
+            : `<input id="c-${c.id}" type="text" value="${val}" placeholder="${c.ejemplo || ''}" autocomplete="off">`;
+          return `<label class="campo">${c.num ? `<span class="num-verso">${c.num}</span>` : ''}<span class="etq">${c.etiqueta}</span>${caja}</label>`;
+        }).join('');
+        app.innerHTML = `<div class="tarjeta">${cabecera(p.titulo)}${p.ayuda ? `<div class="truco"><div class="truco-tit">🧭 ${p.ayudaTit || 'Recuerda'}</div>${p.ayuda}</div>` : ''}
+          <div class="campos">${campos}</div>
+          <p class="ayuda guardado" id="guardado">💾 Se guarda solo en este aparato.</p>
+          <div class="acciones"><button class="btn" id="sig">Siguiente ➜</button></div></div>`;
+        p.campos.forEach(c => { const el = $('c-' + c.id); el.oninput = () => Escritos.guardar(c.id, el.value); });
+        $('voz').onclick = () => hablar(p.titulo + '. ' + (p.ayuda ? app.querySelector('.truco').innerText : ''));
+        $('sig').onclick = () => { sumarKi(5); siguiente(); };
+      },
+      /* Pantalla para releer lo escrito y marcar la lista de revisión. */
+      releer(p) {
+        const poema = p.estrofas.map(e => e.map(id => esc(Escritos.leer(id)) || '<span class="vacio">(verso sin escribir)</span>').join('<br>')).join('<span class="hueco"></span>');
+        const titulo = esc(Escritos.leer(p.tituloId)) || 'Mi poema';
+        app.innerHTML = `<div class="tarjeta">${cabecera(p.titulo)}
+          <div class="poema" id="mi-poema"><b class="titulo-poema">${titulo}</b><br>${poema}</div>
+          <div class="acciones" style="margin-top:0"><button class="voz" id="copiar">📋 Copiar mi poema</button><button class="voz" id="cambiar">✏️ Cambiar algo</button></div>
+          <p class="ayuda">${p.ayuda}</p>
+          <div id="lista">${p.lista.map((t, k) => `<label class="check"><input type="checkbox" id="k-${k}"><span>${t}</span></label>`).join('')}</div>
+          <div class="mensaje" id="msg"></div>
+          <div class="acciones"><button class="btn" id="sig" disabled>Siguiente ➜</button></div></div>`;
+        const cajas = p.lista.map((t, k) => $('k-' + k));
+        cajas.forEach(c => c.onchange = () => {
+          const todas = cajas.every(x => x.checked); $('sig').disabled = !todas;
+          if (todas) exito($('msg'), p.bien); else $('msg').className = 'mensaje';
+        });
+        $('copiar').onclick = async () => {
+          const txt = $('mi-poema').innerText;
+          try { await navigator.clipboard.writeText(txt); $('copiar').textContent = '✅ Copiado'; }
+          catch (e) { $('copiar').textContent = 'No se pudo copiar'; }
+        };
+        $('cambiar').onclick = () => { callar(); i = pantallas.findIndex(x => x.tipo === 'escribir'); render(); window.scrollTo(0, 0); };
+        $('voz').onclick = () => hablar($('mi-poema').innerText + '. ' + p.ayuda);
+        $('sig').onclick = () => { sumarKi(15); siguiente(); };
+      },
       leer(p) {
         const iconos = p.iconos ? `<div class="iconos">${p.iconos.map(x => `<div class="icono">${x.e}<span>${x.t}</span></div>`).join('')}</div>` : '';
         app.innerHTML = `<div class="tarjeta">${cabecera(p.titulo)}${iconos}<div id="txt">${p.html}</div>
